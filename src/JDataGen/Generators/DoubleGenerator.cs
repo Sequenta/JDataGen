@@ -1,0 +1,16 @@
+﻿using System;
+
+namespace JDataGen.Generators
+{
+  public class DoubleGenerator : NumberGenerator<double>
+  {
+    private static Random random = new Random();
+
+    public override object Generate()
+    {
+        return (double)(max != 0
+            ? random.Next((int) min, (int) max)
+            : random.Next());
+    }
+  }
+}
