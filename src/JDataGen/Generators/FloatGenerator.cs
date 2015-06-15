@@ -8,9 +8,11 @@ namespace JDataGen.Generators
 
     public override object Generate()
     {
-        return (float)(max != 0
-             ? random.Next((int)min, (int)max)
-             : random.Next());
+        if (max == 0)
+        {
+            max = 100;
+        }
+        return (float)random.Next((int) min, (int) max);
     }
   }
 }

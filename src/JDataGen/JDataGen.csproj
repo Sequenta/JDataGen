@@ -55,6 +55,7 @@
     <Compile Include="Generators\NumberGenerator.cs" />
     <Compile Include="Generators\NumberGenerators.cs" />
     <Compile Include="Generators\RandomStringGenerator.cs" />
+    <Compile Include="Generators\StringGenerators.cs" />
     <Compile Include="JData.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

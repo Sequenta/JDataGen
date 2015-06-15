@@ -5,26 +5,27 @@ using System.Linq.Expressions;
 
 namespace JDataGen.Configuration
 {
-  public class PropertyGenConfigurationFactory<T>
-  {
-    private readonly JData<T> instance;
-    private PropertyGenConfiguration configuration;
-
-    public PropertyGenConfigurationFactory(JData<T> instance)
+    public class PropertyGenConfigurationFactory<T>
     {
-      this.instance = instance;
-    }
+        private readonly JData<T> instance;
+        private PropertyGenConfiguration configuration;
 
-    public PropertyGenConfigurationFactory<T> For<TValue>(Expression<Func<T, TValue>> expression)
-    {
-      configuration.PropertyName = expression.GetName();
-      return this;
-    }
+        public PropertyGenConfigurationFactory(JData<T> instance)
+        {
+            this.instance = instance;
+            configuration = new PropertyGenConfiguration();
+        }
 
-    public void Use(IGenerator generator)
-    {
-      configuration.Generator = generator;
-      instance.GenConfigurations.Add(configuration);
+        public PropertyGenConfigurationFactory<T> For<TValue>(Expression<Func<T, TValue>> expression)
+        {
+            configuration.PropertyName = expression.GetName();
+            return this;
+        }
+
+        public void Use(IGenerator generator)
+        {
+            configuration.Generator = generator;
+            instance.GenConfigurations.Add(configuration);
+        }
     }
-  }
 }

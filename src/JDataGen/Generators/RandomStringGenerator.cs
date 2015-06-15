@@ -1,36 +1,50 @@
 ﻿using System;
+using System.Text;
 
 namespace JDataGen.Generators
 {
-  public class RandomStringGenerator : IStringGenerator, IGenerator
-  {
-    private static string ruSet = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-    private static string enSet = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-    private static string numSes = "0123456789";
-
-    public object Generate()
+    public class RandomStringGenerator : IStringGenerator
     {
-      throw new NotImplementedException();
-    }
+        private static readonly Random random = new Random();
 
-    public IStringGenerator Length(int length)
-    {
-      throw new NotImplementedException();
-    }
+        private static string letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+       
+        private string customSet = string.Empty;
+        private string format = string.Empty;
+        private int length;
 
-    public IStringGenerator Format(string format, IGenerator argsGenerator)
-    {
-      throw new NotImplementedException();
-    }
+        public object Generate()
+        {
+            var source = string.IsNullOrEmpty(customSet) ? letters : customSet;
+            if (length == 0)
+            {
+                length = random.Next(1, 10);
+            }
+            var builder = new StringBuilder();
+            for (var i = 0; i < length; i++)
+            {
+                builder.Append(source[random.Next(1, source.Length)]);
+            }
+            return string.IsNullOrEmpty(format) ? builder.ToString() : 
+                                                  string.Format(format, builder);
+        }
 
-    public IStringGenerator CharacterSet(string set)
-    {
-      throw new NotImplementedException();
-    }
+        public IStringGenerator Length(int number)
+        {
+            length = number;
+            return this;
+        }
 
-    public IStringGenerator IncludeDigits(bool flag)
-    {
-      throw new NotImplementedException();
+        public IStringGenerator Format(string formatString)
+        {
+            format = formatString;
+            return this;
+        }
+
+        public IStringGenerator CharacterSet(string set)
+        {
+            customSet = set;
+            return this;
+        }
     }
-  }
 }

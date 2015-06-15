@@ -2,9 +2,8 @@
 {
   public interface IStringGenerator : IGenerator
   {
-    IStringGenerator Length(int length);
-    IStringGenerator Format(string format, IGenerator argsGenerator);
+    IStringGenerator Length(int number);
+    IStringGenerator Format(string formatString);
     IStringGenerator CharacterSet(string set);
-    IStringGenerator IncludeDigits(bool flag);
   }
 }

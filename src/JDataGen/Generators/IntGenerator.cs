@@ -2,15 +2,17 @@
 
 namespace JDataGen.Generators
 {
-  public class IntGenerator : NumberGenerator<int>
-  {
-    private static Random random = new Random();
-
-    public override object Generate()
+    public class IntGenerator : NumberGenerator<int>
     {
-        return max != 0
-             ? random.Next(min, max)
-             : random.Next();
+        private static Random random = new Random();
+
+        public override object Generate()
+        {
+            if (max == 0)
+            {
+                max = 100;
+            }
+            return random.Next(min, max);
+        }
     }
-  }
 }
