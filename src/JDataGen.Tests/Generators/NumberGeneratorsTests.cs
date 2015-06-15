@@ -8,19 +8,31 @@ namespace JDataGen.Tests.Generators
     [Fact]
     public void IntGeneratorTest()
     {
-      Assert.True(NumberGenerators.Int().Min(1).Max(5).Generate() is int);
+        var generator = NumberGenerators.Int().Min(1).Max(5);
+
+        var result = generator.Generate();
+
+        Assert.IsType(typeof(int),result);
     }
 
     [Fact]
     public void FloatGeneratorTest()
     {
-      Assert.True(NumberGenerators.Float().Min(1f).Max(5f).Generate() is float);
+        var generator = NumberGenerators.Float().Min(1).Max(5);
+
+        var result = generator.Generate();
+
+        Assert.IsType(typeof(float), result);
     }
 
     [Fact]
     public void DoubleGeneratorTest()
     {
-      Assert.True(NumberGenerators.Double().Min(1.0).Max(5.0).Generate() is double);
+        var generator = NumberGenerators.Double().Min(1).Max(5);
+
+        var result = generator.Generate();
+
+        Assert.IsType(typeof(double), result);
     }
   }
 }
